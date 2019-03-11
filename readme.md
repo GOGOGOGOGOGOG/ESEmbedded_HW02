@@ -73,3 +73,68 @@ Push Multiple Registers stores a subset (or possibly all) of the general-purpose
 ```
 Pop Multiple Registers loads a subset (or possibly all) of the general-purpose registers R0-R12 and the PC or the LR from the stack.
 ```
+而push和pop的順序並不會影響，比如說：push{r0,r1,r2,r3}跟push{r1,r2,r3,r0}其結果是一樣的，並且顯示的順序都會和前者相
+# 設計main.s 
+因為想看暫存器更多的操作所以增加的sub的指令：
+```
+.syntax unified
+
+.word 0x20000100
+.word _start
+
+.global _start
+.type _start, %function
+_start:
+	//
+	//mov # to reg
+	//
+	movs	r0,	#250
+	movs	r1,	#250
+	movs	r2,	#102
+	movs	r3,	#103
+	movs    r4, #36
+	movs    r5, #36
+	movs    r6, #190
+	movs    r7, #270
+	movs    r8, #300
+	movs    r9, #360
+    
+	// move reg to reg
+    movs    r0, r5  //check difference between mov and movs 
+	mov     r1, r4
+
+	// sub 
+	sub     r1, r2 //r1 =-66
+	sub     r4, r5 // r4 =0
+    // reset
+	movs	r0,	#250
+	movs	r1,	#250
+	movs	r2,	#102
+	movs	r3,	#103
+
+
+	// push and pop
+	//
+    push	{r0, r1, r2, r3}
+	 // reset
+	movs	r0,	#250
+	movs	r1,	#250
+	movs	r2,	#102
+	movs	r3,	#103
+	// push and pop
+	//
+    push	{r1, r2, r0, r3}  //still in compiler is {r0,r1,r2,r3}
+
+	// push and pop
+    pop     {r6,r7,r8,r9}   //stack pointer 
+    // push and pop
+	pop     {r8,r7,r9,r6}  //stack pointer getting bigger but still in compiler {r6,r7,r8,r9}
+```
+我們給予r0~r9整數值進行測試，以push{r0,r1,r2,r3}為例，sp由0x20000100轉為0x20000f0，因為每個暫存器記憶體大小為4bits，psuh4個暫存器後，其sp壓縮了16個bits，如圖：
+**push前**
+file:///home/xian/%E5%9C%96%E7%89%87/2019-03-11%2018-10-58%20%E7%9A%84%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96.png
+
+**push後**
+file:///home/xian/%E5%9C%96%E7%89%87/2019-03-11%2018-12-03%20%E7%9A%84%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96.png
+
+
