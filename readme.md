@@ -66,6 +66,6 @@ This is the hw02 sample. Please follow the steps below.
 3. 重要手冊資訊
 本次作業最重要的是了解關於pop，push等指令在處理器中的影響和sp的變化
 以push來說：
-'''Push Multiple Registers stores a subset (or possibly all) of the general-purpose registers R0-R12 and the LR to the stack.'''
+**Push Multiple Registers stores a subset (or possibly all) of the general-purpose registers R0-R12 and the LR to the stack.**
 以pop來說：
-'Pop Multiple Registers loads a subset (or possibly all) of the general-purpose registers R0-R12 and the PC or the LR from the stack.'
+**Pop Multiple Registers loads a subset (or possibly all) of the general-purpose registers R0-R12 and the PC or the LR from the stack.**
