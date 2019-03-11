@@ -54,5 +54,18 @@ This is the hw02 sample. Please follow the steps below.
 -  **If you volunteer to give the presentation next week, check this.**
 
 --------------------
+# HW02 作業心得
 
-Please take your note here.
+1. 實驗題目：
+撰寫組合語言觀察其中的變化以及記憶體和sp之間的變化，包括對於pop push sub等操作
+
+2. 實驗步驟：
+  - 先將資料夾 gnu-mcu-eclipse-qemu 完整複製到 ESEmbedded_HW02 資料夾中
+  - 安裝cross compiler和GNU Debuger for ARM
+  - 熟讀ARM ArchitectureReference ManualThumb-2 Supplement
+3. 重要手冊資訊
+本次作業最重要的是了解關於pop，push等指令在處理器中的影響和sp的變化
+以push來說：
+'Push Multiple Registers stores a subset (or possibly all) of the general-purpose registers R0-R12 and the LR to the stack.'
+以pop來說：
+'Pop Multiple Registers loads a subset (or possibly all) of the general-purpose registers R0-R12 and the PC or the LR from the stack.'
