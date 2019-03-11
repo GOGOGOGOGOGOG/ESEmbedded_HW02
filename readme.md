@@ -130,10 +130,29 @@ _start:
     // push and pop
 	pop     {r8,r7,r9,r6}  //stack pointer getting bigger but still in compiler {r6,r7,r8,r9}
 ```
+
+## push
+
 我們給予r0~r9整數值進行測試，以push{r0,r1,r2,r3}為例，sp由0x20000100轉為0x20000f0，因為每個暫存器記憶體大小為4bits，psuh4個暫存器後，其sp壓縮了16個bits，如圖：
 **push前**
 ![image](https://github.com/GOGOGOGOGOGOG/ESEmbedded_HW02/blob/master/2019-03-11%2018-10-58%20%E7%9A%84%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96.png)
 **push後**
+![image](https://github.com/GOGOGOGOGOGOG/ESEmbedded_HW02/blob/master/2019-03-11%2018-12-03%20%E7%9A%84%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96.png)
+
+而在push的順序改變下，以處理器來看依舊是沒有變化的，如圖:
+![image](https://github.com/GOGOGOGOGOGOG/ESEmbedded_HW02/blob/master/2019-03-11%2018-22-11%20%E7%9A%84%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96.png)
+
+## pop
+我們給予r0~r9整數值進行測試，以push{r6,r7,r8,r9}為例，其因為pop掉4個暫存器的記憶體大小，故由0x200000e0變為0x200000f0，而因為push和pop性質相同，順序亦不影響sp表現的行為，如圖：
+**pop前**
+![image](https://github.com/GOGOGOGOGOGOG/ESEmbedded_HW02/blob/master/2019-03-11%2018-24-47%20%E7%9A%84%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96.png)
+
+**pop後**
+![image](https://github.com/GOGOGOGOGOGOG/ESEmbedded_HW02/blob/master/2019-03-11%2018-27-42%20%E7%9A%84%E8%9E%A2%E5%B9%95%E6%93%B7%E5%9C%96.png)
+# 作業心得
+本次作業了解到原來gdb還能使用在組合語言上面，並且除了可以跟valgrind結合幫程式碼debug以外還能跟qemu一起使用來觀察記憶體操作的行為，之後會再針對組合語言和gdb的操作去做更多的認識和撰寫。
+
+
 
 
 
